@@ -41,3 +41,17 @@ plot_spatial <- function(DF) {
 
   plotly::ggplotly(p)
 }
+
+
+plot_error <- function(DF) {
+  
+  p <- ggplot2::ggplot(data = DF, ggplot2::aes(Sale_Price, predict_value, col = model)) +
+    ggplot2::geom_point() +
+    ggplot2::geom_smooth(method = "loess") +
+    viridis::scale_color_viridis(discrete = TRUE) +
+    ggplot2::scale_x_continuous(labels = scales::dollar) +
+    ggplot2::scale_y_continuous(labels = scales::dollar) +
+    ggplot2::theme_minimal()
+  
+  plotly::ggplotly(p)
+}
