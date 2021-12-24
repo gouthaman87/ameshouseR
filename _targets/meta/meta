@@ -1,0 +1,20 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|iteration|parent|children|seconds|warnings|error
+raw_data|stem|a57f684a8b149ffb|2627db1c2118d911|d3de1d7f7c81a9e9|-979620141||t18985.5961040398s|bc11c898f409f9b1|153478|rds|vector|||0.08||
+train_test_split|stem|dbfc83d3f467114f|f02e77f2fb0f64b2|893038fa5f6667df|-1768825896||t18985.5961119764s|a6b4f4afa545e702|160009|rds|vector|||0.56||
+models_workflowset|stem|d52d2fb573214a0e|d88eed132ca63427|f8f5c1337197aa54|-1792344241||t18985.6085436669s|309741933c2ba333|836|rds|vector|||2.91||
+fitted_models|stem|0f54bc4401c3c13c|a9cd6e4a45877dc1|2657424146e350a1|-670788693||t18985.6085600924s|c3fe09d3af782d04|584362|rds|vector|||1.21||
+ml_lm|function|9419151dd5db5b3a||||||||||||||
+ml_rf|function|dddc9f9b36f48137||||||||||||||
+read_from_path|function|5b3081fb53f5e373||||||||||||||
+ml_glmnet|function|986f8e70b8e76e9f||||||||||||||
+file_functions|object|e09520b742a6ca7c||||||||||||||
+plot_spatial|function|3071cef7a4a2343f||||||||||||||
+model_workflow|function|789470af78c91518||||||||||||||
+plot_hist|function|c9d5a26b3fbbe76f||||||||||||||
+ml_stan|function|fe4f8867691a7733||||||||||||||
+plot_error|function|8b3e0493b01832e9||||||||||||||
+data_split|function|ac17904d0e922aba||||||||||||||
+ml_dt|function|b2169a37745cff02||||||||||||||
+predict_values|function|172f52bc0402a031||||||||||||||
+model_fit|function|1c3c9dfe1d4b4bf4||||||||||||||
+predict_data|stem||481e01dc26d940ac|8fd5dc7839ed5137|1524746754||t18985.600126423s||0|rds|vector|||0.02||Problem with mutate column predict_value.34mi39m predict_value  purrrmapfit, predict.xworkflow1, newdata  DF.31mx39m no applicable method for predict applied to an object of class NULL

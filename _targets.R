@@ -1,6 +1,6 @@
 library(targets)
 
-file_functions = list.files(path = "ameshouseR/R", full.names = TRUE)
+file_functions = list.files(path = "R", full.names = TRUE)
 
 sapply(file_functions, source)
 
@@ -11,21 +11,25 @@ sapply(file_functions, source)
 list(
   # Read Data ----
   tar_target(name = raw_data,
-             read_from_path(path = "ameshouseR/data/ames.rda")),
-  
+             read_from_path(path = "data/ames.rda")),
+
   # Split Data ----
   tar_target(name = train_test_split,
              data_split(DF = raw_data,
                         prop = 0.8,
                         resp = "Sale_Price")),
-  
+
+  # Model workflow sets ----
+  tar_target(name = models_workflowset,
+             model_workflow(model_name = c("lm"))),
+
   # Train the models ----
   tar_target(name = fitted_models,
-             fit_model(DF = rsample::training(train_test_split), 
-                       model_name = c("lm", "stan", "dt"))),
-  
+             model_fit(DF = rsample::training(train_test_split),
+                       model_set = models_workflowset)),
+
   # Predict Values ----
   tar_target(name = predict_data,
-             extract_fit(fitted_model = fitted_models) |> 
-               predict_values(DF = rsample::testing(train_test_split)))
+             predict_values(DF = rsample::testing(train_test_split),
+                            model_fit = fitted_models))
 )

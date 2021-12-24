@@ -43,8 +43,14 @@ plot_spatial <- function(DF) {
 }
 
 
+#' Scatter Plot of Actual Vs. Predicted
+#'
+#' @inheritParams plot_hist
+#'
+#' @return Plot
+#' @export
 plot_error <- function(DF) {
-  
+
   p <- ggplot2::ggplot(data = DF, ggplot2::aes(Sale_Price, predict_value, col = model)) +
     ggplot2::geom_point() +
     ggplot2::geom_smooth(method = "loess") +
@@ -52,6 +58,6 @@ plot_error <- function(DF) {
     ggplot2::scale_x_continuous(labels = scales::dollar) +
     ggplot2::scale_y_continuous(labels = scales::dollar) +
     ggplot2::theme_minimal()
-  
+
   plotly::ggplotly(p)
 }
