@@ -31,3 +31,16 @@ data_split <- function(
     rsample::initial_split(data = DF, prop = prop, strata = dplyr::all_of(resp))
   )
 }
+
+
+data_recipe <- function(
+  DF,
+  features
+) {
+
+  recipes::recipe(Sale_Price ~ ., data = DF) |>
+    recipes::step_select(dplyr::matches(features)) |>
+    recipes::step_log(Gr_Liv_Area, base = 10) |>
+    recipes::step_other(dplyr::matches("Neighborhood"), threshold = 0.01) |>
+    recipes::step_dummy(recipes::all_nominal_predictors())
+}
