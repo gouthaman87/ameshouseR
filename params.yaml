@@ -1,0 +1,10 @@
+features:
+  - Sale_Price
+  - Neighborhood
+  - Gr_liv_Area
+  - Year_Built
+  - Bldg_Type
+  - Latitude
+  - Total_Bsmt_SF
+  - First_Flr_SF
+  - Gr_Liv_Area

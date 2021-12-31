@@ -33,14 +33,42 @@ data_split <- function(
 }
 
 
+#' The Data Recipe with Feature Engineering
+#'
+#' @param DF The Data to create Recipe
+#' @param features The predictor variables to fit
+#'
+#' @importFrom dplyr matches
+#' @importFrom dplyr starts_with
+#'
+#' @return The recipe
+#' @export
 data_recipe <- function(
   DF,
   features
 ) {
 
+  DF <- DF |>
+    dplyr::select(dplyr::matches(features))
+
   recipes::recipe(Sale_Price ~ ., data = DF) |>
-    recipes::step_select(dplyr::matches(features)) |>
-    recipes::step_log(Gr_Liv_Area, base = 10) |>
+    recipes::step_log(dplyr::matches("Gr_Liv_Area"), base = 10) |>
     recipes::step_other(dplyr::matches("Neighborhood"), threshold = 0.01) |>
-    recipes::step_dummy(recipes::all_nominal_predictors())
+
+    # Add Feature Hashing
+    # embed::step_feature_hash(recipes::all_nominal_predictors()) |>
+
+    recipes::step_dummy(recipes::all_nominal_predictors()) |>
+
+    # Add Interaction Term
+    recipes::step_interact(
+     terms = ~ matches("Gr_Liv_Area"):starts_with("Bldg_Type_")
+    ) |>
+    recipes::step_zv(recipes::all_predictors()) |>
+
+    # Add Spline Features
+    recipes::step_ns(dplyr::matches("Latitude"), deg_free = 20) |>
+
+    # Add PCA
+    recipes::step_pca(dplyr::matches("(SF$)|(GR_LIV)"))
 }

@@ -1,0 +1,12 @@
+globalVariables(
+  c("Latitude",
+    "Longitude",
+    "Neighborhood",
+    "Sale_Price",
+    "data",
+    "fit",
+    "info",
+    "model",
+    "predict_value",
+    "wflow_id")
+)

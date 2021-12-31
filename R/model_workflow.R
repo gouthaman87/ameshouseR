@@ -3,6 +3,7 @@
 #'
 #' @param DF The training Data Frame
 #' @param model_name The model names
+#' @param features The predictor variables to fit
 #'
 #' @return Workflow Set object
 #' @export
@@ -22,40 +23,41 @@ model_workflow <- function(
 }
 
 
-
-#' #' Fit the workflow set
-#' #'
-#' #' @param DF The training Data Frame
-#' #' @param model_set The workflow set which is output of `model_workflow`
-#' #'
-#' #' @return Workflow Set with fit column
-#' #' @export
-#' model_fit <- function(
-#'   DF,
-#'   model_set
-#' ) {
+#' Fit the workflow set
 #'
-#'   model_set |>
-#'     # dplyr::mutate(
-#'     #   fit = purrr::map(info, ~parsnip::fit(.x$workflow[[1]], DF))
-#'     # )
-#'     workflowsets::workflow_map(data = DF)
-#' }
+#' @param DF The training Data Frame
+#' @param model_set The workflow set which is output of `model_workflow`
+#'
+#' @return Workflow Set with fit column
+#' @export
+model_fit <- function(
+  DF,
+  model_set
+) {
+
+  model_set |>
+    dplyr::mutate(
+      fit = purrr::map(info, ~parsnip::fit(.x$workflow[[1]], data = DF))
+    ) |>
+    dplyr::select(wflow_id, fit)
+}
 
 
-# predict_values <- function(model_fit,
-#                            DF) {
-#
-#   model_fit |>
-#     dplyr::mutate(
-#       predict_value = purrr::map(fit, ~predict(.x$workflow[[1]], newdata = DF))
-#     )
-#
-#   # extracted_model |>
-#   #   purrr::map_dfr(~{
-#   #     DF |>
-#   #       dplyr::select(Sale_Price) |>
-#   #       dplyr::bind_cols(predict_value = predict(.x, newdata = DF))
-#   #   },
-#   #   .id = "model")
-# }
+#' Predict the values
+#'
+#' @param model_fit The fitted model workflow sets is output of `model_fit`
+#' @param DF The Testing / New Data Frame to predict.
+#'
+#' @return Predicted Data Frame
+#' @export
+predict_values <- function(model_fit,
+                           DF) {
+
+  model_fit |>
+    dplyr::mutate(
+      predict_value = purrr::map(fit, ~predict(.x, new_data = DF)),
+      data = list(DF |> dplyr::select(Sale_Price))
+    ) |>
+    dplyr::select(wflow_id, predict_value, data) |>
+    tidyr::unnest(cols = c(predict_value, data))
+}
