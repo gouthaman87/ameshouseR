@@ -8,5 +8,8 @@ globalVariables(
     "info",
     "model",
     "predict_value",
-    "wflow_id")
+    "wflow_id",
+    ".estimate",
+    ".metric",
+    ".pred")
 )

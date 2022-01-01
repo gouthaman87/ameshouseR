@@ -47,17 +47,20 @@ plot_spatial <- function(DF) {
 #'
 #' @inheritParams plot_hist
 #'
+#' @importFrom tune coord_obs_pred
+#'
 #' @return Plot
 #' @export
 plot_error <- function(DF) {
 
-  p <- ggplot2::ggplot(data = DF, ggplot2::aes(Sale_Price, predict_value, col = model)) +
-    ggplot2::geom_point() +
+  p <- ggplot2::ggplot(data = DF, ggplot2::aes(Sale_Price, .pred, col = wflow_id)) +
+    ggplot2::geom_point(alpha = 0.5) +
     ggplot2::geom_smooth(method = "loess") +
     viridis::scale_color_viridis(discrete = TRUE) +
     ggplot2::scale_x_continuous(labels = scales::dollar) +
     ggplot2::scale_y_continuous(labels = scales::dollar) +
-    ggplot2::theme_minimal()
+    ggplot2::theme_minimal() +
+    tune::coord_obs_pred()
 
   plotly::ggplotly(p)
 }

@@ -61,3 +61,24 @@ predict_values <- function(model_fit,
     dplyr::select(wflow_id, predict_value, data) |>
     tidyr::unnest(cols = c(predict_value, data))
 }
+
+
+#' Create Accuracy Metric Set
+#'
+#' @param DF The Predicted Data Frame
+#'
+#' @return The Accuracy metric set
+#' @export
+accuracy_metric <- function(DF) {
+
+  ames_metrics <- yardstick::metric_set(
+    yardstick::rmse,
+    yardstick::mae,
+    yardstick::rsq
+  )
+
+  DF |>
+    dplyr::group_by(wflow_id) |>
+    ames_metrics(truth = Sale_Price, estimate = .pred) |>
+    tidyr::pivot_wider(id_cols = .metric, names_from = wflow_id, values_from = .estimate)
+}

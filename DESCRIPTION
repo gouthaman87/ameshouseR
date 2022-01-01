@@ -25,4 +25,6 @@ Imports:
     tidyr,
     viridis,
     withr,
-    workflowsets
+    workflowsets,
+    tune,
+    yardstick
