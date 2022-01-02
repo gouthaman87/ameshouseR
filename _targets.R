@@ -5,7 +5,7 @@ file_functions = list.files(path = "R", full.names = TRUE)
 sapply(file_functions, source)
 
 tar_option_set(
-  packages = c("tidyverse", "tidymodels")
+  packages = c("tidyverse", "tidymodels", "treesnip")
 )
 
 list(
@@ -34,13 +34,19 @@ list(
   # Model workflow sets ----
   tar_target(name = models_workflowset,
              model_workflow(DF = rsample::training(train_test_split),
-                            model_name = c("lm", "stan"),
+                            model_name = c("lm", "rf", "lgbm", "dt"),
                             features = params[["features"]])),
 
   # Train the models ----
   tar_target(name = fitted_models,
              model_fit(DF = rsample::training(train_test_split),
+                       type_of_resample = "cv",
                        model_set = models_workflowset)),
+
+  # Asses the models ----
+  tar_target(name = train_metrics,
+             tune::collect_metrics(fitted_models, summarize = FALSE) |>
+               dplyr::filter(.metric == "rmse")),
 
   # Predict Values ----
   tar_target(name = predict_data,

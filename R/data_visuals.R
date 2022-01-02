@@ -56,11 +56,12 @@ plot_error <- function(DF) {
   p <- ggplot2::ggplot(data = DF, ggplot2::aes(Sale_Price, .pred, col = wflow_id)) +
     ggplot2::geom_point(alpha = 0.5) +
     ggplot2::geom_smooth(method = "loess") +
+    ggplot2::geom_abline(col = "red") +
     viridis::scale_color_viridis(discrete = TRUE) +
     ggplot2::scale_x_continuous(labels = scales::dollar) +
     ggplot2::scale_y_continuous(labels = scales::dollar) +
-    ggplot2::theme_minimal() +
-    tune::coord_obs_pred()
+    ggplot2::theme_minimal()
+    # tune::coord_obs_pred()
 
   plotly::ggplotly(p)
 }

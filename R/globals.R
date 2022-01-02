@@ -11,5 +11,6 @@ globalVariables(
     "wflow_id",
     ".estimate",
     ".metric",
-    ".pred")
+    ".pred",
+    "result")
 )

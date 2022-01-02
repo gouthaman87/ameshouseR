@@ -27,19 +27,43 @@ model_workflow <- function(
 #'
 #' @param DF The training Data Frame
 #' @param model_set The workflow set which is output of `model_workflow`
+#' @param type_of_resample The type of resample Cross-Validation/Validation/Bootstrap
 #'
 #' @return Workflow Set with fit column
 #' @export
 model_fit <- function(
   DF,
+  type_of_resample = as.character(),
   model_set
 ) {
 
+  # Register Parallel
+  # cl <- parallel::makePSOCKcluster(2)
+  # doParallel::registerDoParallel(cl)
+  # withr::defer(parallel::stopCluster(cl))
+
+  if(!type_of_resample %in% c("cv", "validation", "bootstrap"))
+    stop("Please Select a Resample method")
+
+  logger::log_info("Model fitting on {type_of_resample} Method")
+
+  # Create Cross-Validation Folds
+  if(type_of_resample %in% "cv") {
+    folds <- rsample::vfold_cv(DF, v = 10)
+  } else if(type_of_resample %in% "validation") {
+    folds <- rsample::validation_split(DF, prop = 3/4)
+  } else {
+    folds <- rsample::bootstraps(DF, times = 5)
+  }
+
   model_set |>
-    dplyr::mutate(
-      fit = purrr::map(info, ~parsnip::fit(.x$workflow[[1]], data = DF))
-    ) |>
-    dplyr::select(wflow_id, fit)
+    workflowsets::workflow_map(
+      resamples = folds,
+      fn = "fit_resamples",
+      verbose = TRUE,
+      control = tune::control_resamples(save_pred = TRUE, save_workflow = TRUE)
+    )
+    # dplyr::transmute(wflow_id := gsub("recipe_","",wflow_id), result)
 }
 
 
@@ -55,7 +79,7 @@ predict_values <- function(model_fit,
 
   model_fit |>
     dplyr::mutate(
-      predict_value = purrr::map(fit, ~predict(.x, new_data = DF)),
+      predict_value = purrr::map(result, ~predict(.x, new_data = DF)),
       data = list(DF |> dplyr::select(Sale_Price))
     ) |>
     dplyr::select(wflow_id, predict_value, data) |>

@@ -324,6 +324,13 @@
       "Repository": "CRAN",
       "Hash": "ce49bfe5bc0b3ecd43a01fe1b01c2243"
     },
+    "clustermq": {
+      "Package": "clustermq",
+      "Version": "0.8.95.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cfc7c04384e7340ff65b450d097da566"
+    },
     "codetools": {
       "Package": "codetools",
       "Version": "0.2-18",
@@ -947,6 +954,13 @@
       "Repository": "CRAN",
       "Hash": "a6b6d352e3ed897373ab19d8395c98d0"
     },
+    "lightgbm": {
+      "Package": "lightgbm",
+      "Version": "3.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "57876eac20d6b9b8c5f411a2ed326278"
+    },
     "listenv": {
       "Package": "listenv",
       "Version": "0.8.0",
@@ -967,6 +981,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "d27e947989c8defe2febcd74d40ab71b"
+    },
+    "logger": {
+      "Package": "logger",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c269b06beb2bbadb0d058c0e6fa4ec3d"
     },
     "loo": {
       "Package": "loo",
@@ -1065,6 +1086,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6dfe8bf774944bd5595785e3229d8771"
+    },
+    "narray": {
+      "Package": "narray",
+      "Version": "0.4.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c64865aba235f36a49d798613cbfccf7"
     },
     "nlme": {
       "Package": "nlme",
@@ -1730,6 +1758,25 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "130fe4c61e55b271a2655b3a284a205f"
+    },
+    "tree": {
+      "Package": "tree",
+      "Version": "1.0-41",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "65259917f358289aab75bc04e6ef9d44"
+    },
+    "treesnip": {
+      "Package": "treesnip",
+      "Version": "0.1.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "treesnip",
+      "RemoteUsername": "curso-r",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "3e4c2207cd137f1764b10ea019cea2218875bc48",
+      "Hash": "712fe876ef72862bdbe5a22988ce6292"
     },
     "tseries": {
       "Package": "tseries",

@@ -3,7 +3,7 @@
 #' @return model
 #' @export
 ml_lm <- function(){
-  parsnip::linear_reg(mode = "regression") |> 
+  parsnip::linear_reg(mode = "regression") |>
     parsnip::set_engine("lm")
 }
 
@@ -14,7 +14,7 @@ ml_lm <- function(){
 #' @export
 ml_glmnet <- function(){
   parsnip::linear_reg(mode = "regression",
-                      penalty = 0) |> 
+                      penalty = 0) |>
     parsnip::set_engine("glmnet")
 }
 
@@ -24,7 +24,7 @@ ml_glmnet <- function(){
 #' @return model
 #' @export
 ml_stan <- function(){
-  parsnip::linear_reg(mode = "regression") |> 
+  parsnip::linear_reg(mode = "regression") |>
     parsnip::set_engine("stan")
 }
 
@@ -34,7 +34,7 @@ ml_stan <- function(){
 #' @return model
 #' @export
 ml_rf <- function(){
-  parsnip::rand_forest(mode = "regression") |> 
+  parsnip::rand_forest(mode = "regression") |>
     parsnip::set_engine("ranger",
                         importance = "permutation")
 }
@@ -45,6 +45,16 @@ ml_rf <- function(){
 #' @return model
 #' @export
 ml_dt <- function(){
-  parsnip::decision_tree(mode = "regression") |> 
+  parsnip::decision_tree(mode = "regression") |>
     parsnip::set_engine("rpart")
+}
+
+
+#' LightGBM
+#'
+#' @return model
+#' @export
+ml_lgbm <- function(){
+  parsnip::boost_tree(mode = "regression") |>
+    parsnip::set_engine("lightgbm")
 }

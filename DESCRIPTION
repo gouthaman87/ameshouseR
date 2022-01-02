@@ -27,4 +27,5 @@ Imports:
     withr,
     workflowsets,
     tune,
-    yardstick
+    yardstick,
+    logger
