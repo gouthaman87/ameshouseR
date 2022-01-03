@@ -28,4 +28,6 @@ Imports:
     workflowsets,
     tune,
     yardstick,
-    logger
+    logger,
+    tidyposterior,
+    stats

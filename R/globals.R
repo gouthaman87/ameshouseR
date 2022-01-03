@@ -12,5 +12,6 @@ globalVariables(
     ".estimate",
     ".metric",
     ".pred",
-    "result")
+    "result",
+    "id")
 )

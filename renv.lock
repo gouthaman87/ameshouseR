@@ -149,6 +149,13 @@
       "Repository": "CRAN",
       "Hash": "0459d4dd7a8c239be18469a30c23dd4b"
     },
+    "TSP": {
+      "Package": "TSP",
+      "Version": "1.1-11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b72b16750535acbc63e1337d38ff1ace"
+    },
     "TTR": {
       "Package": "TTR",
       "Version": "0.24.3",
@@ -372,6 +379,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "c6bb5e1ef58f2f1c84f238f55bd2e56a"
+    },
+    "corrr": {
+      "Package": "corrr",
+      "Version": "0.4.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dbd1387c025b07f62da3334942176e14"
     },
     "cpp11": {
       "Package": "cpp11",
@@ -625,6 +639,13 @@
       "Repository": "CRAN",
       "Hash": "9d234e6a87a6f8181792de6dc4a00e39"
     },
+    "gclus": {
+      "Package": "gclus",
+      "Version": "1.3.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8f905e7f70ac42e5b0e39d6ba360dd44"
+    },
     "generics": {
       "Package": "generics",
       "Version": "0.1.1",
@@ -645,6 +666,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "d7566c471c7b17e095dd023b9ef155ad"
+    },
+    "ggrepel": {
+      "Package": "ggrepel",
+      "Version": "0.9.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "08ab869f37e6a7741a64ab9069bcb67d"
     },
     "ggridges": {
       "Package": "ggridges",
@@ -1297,6 +1325,13 @@
       "Repository": "CRAN",
       "Hash": "97def703420c8ab10d8f0e6c72101e02"
     },
+    "qap": {
+      "Package": "qap",
+      "Version": "0.1-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "753e69deffc32851121955ea150ecf8d"
+    },
     "quadprog": {
       "Package": "quadprog",
       "Version": "1.5-8",
@@ -1366,6 +1401,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "443951ef5d9e72a96405cbb0157bb1d4"
+    },
+    "registry": {
+      "Package": "registry",
+      "Version": "0.5-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1c9935f4f14c6c096c9c9072ddee59f1"
     },
     "rematch": {
       "Package": "rematch",
@@ -1541,6 +1583,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
+    },
+    "seriation": {
+      "Package": "seriation",
+      "Version": "1.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "76ad2df9a7784e78dfaebe1ac9e295c3"
     },
     "sessioninfo": {
       "Package": "sessioninfo",
