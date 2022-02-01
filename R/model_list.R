@@ -13,8 +13,10 @@ ml_lm <- function(){
 #' @return model
 #' @export
 ml_glmnet <- function(){
-  parsnip::linear_reg(mode = "regression",
-                      penalty = 0) |>
+  parsnip::linear_reg(
+    mode = "regression"
+    # penalty = tune::tune()
+  ) |>
     parsnip::set_engine("glmnet")
 }
 
@@ -34,7 +36,11 @@ ml_stan <- function(){
 #' @return model
 #' @export
 ml_rf <- function(){
-  parsnip::rand_forest(mode = "regression") |>
+  parsnip::rand_forest(
+    mode = "regression",
+    trees = 100
+    # mtry = tune::tune()
+  ) |>
     parsnip::set_engine("ranger",
                         importance = "permutation")
 }
@@ -45,7 +51,9 @@ ml_rf <- function(){
 #' @return model
 #' @export
 ml_dt <- function(){
-  parsnip::decision_tree(mode = "regression") |>
+  parsnip::decision_tree(
+    mode = "regression"
+  ) |>
     parsnip::set_engine("rpart")
 }
 
@@ -55,6 +63,29 @@ ml_dt <- function(){
 #' @return model
 #' @export
 ml_lgbm <- function(){
-  parsnip::boost_tree(mode = "regression") |>
+  parsnip::boost_tree(
+    mode = "regression",
+    tree_depth = tune::tune(),
+    learn_rate = tune::tune(),
+    loss_reduction = tune::tune(),
+    min_n = tune::tune(),
+    sample_size = tune::tune(),
+    trees = tune::tune(),
+    mtry = tune::tune()
+  ) |>
     parsnip::set_engine("lightgbm")
 }
+
+
+#' catBoost
+#'
+#' @return model
+#' @export
+ml_catboost <- function(){
+  parsnip::boost_tree(
+    mode = "regression"
+    # mtry = tune::tune()
+  ) |>
+    parsnip::set_engine("catboost")
+}
+

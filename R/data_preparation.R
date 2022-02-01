@@ -48,12 +48,10 @@ data_recipe <- function(
   features
 ) {
 
-  DF <- DF |>
-    dplyr::select(dplyr::matches(features))
-
   recipes::recipe(Sale_Price ~ ., data = DF) |>
+    recipes::step_select(dplyr::matches(features)) |>
     recipes::step_log(dplyr::matches("Gr_Liv_Area"), base = 10) |>
-    recipes::step_other(dplyr::matches("Neighborhood"), threshold = 0.01) |>
+    recipes::step_other(dplyr::matches("Neighborhood"), threshold = tune::tune()) |>
 
     # Add Feature Hashing
     # embed::step_feature_hash(recipes::all_nominal_predictors()) |>
@@ -67,7 +65,8 @@ data_recipe <- function(
     recipes::step_zv(recipes::all_predictors()) |>
 
     # Add Spline Features
-    recipes::step_ns(dplyr::matches("Latitude"), deg_free = 20) |>
+    recipes::step_ns(dplyr::matches("Latitude"), deg_free = tune::tune("lat df")) |>
+    recipes::step_ns(dplyr::matches("Longitude"), deg_free = tune::tune("long df")) |>
 
     # Add PCA
     recipes::step_pca(dplyr::matches("(SF$)|(GR_LIV)"))
