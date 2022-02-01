@@ -1,19 +1,15 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|iteration|parent|children|seconds|warnings|error
-raw_data|stem|87ffa3e414c74dfc|2627db1c2118d911|d3de1d7f7c81a9e9|-979620141||t18985.7915607642s|08792523f76b82fc|153475|rds|vector|||0.065||
-train_test_split|stem|ea2f8180bf83c094|f02e77f2fb0f64b2|f56affa4f8796113|-1768825896||t18985.7915660958s|4826931abf70b738|160008|rds|vector|||0.387||
-param_file|stem|0fdebeeb9719db0a|a1279b691c233b3b|ef46db3751d8e999|-1046133151|params.yaml|t18992.7013822377s|2f4c0f199b39241a|151|file|vector|||4.018||
-params|stem|9e9f3bbb0219c3f6|38ecfd31b8ab35bc|e7c47bb571ca65ba|890816472||t18992.7016480068s|334ec4c391c6746c|186|rds|vector|||0.003||
-model_recipe|stem|42df00cfa3898d19|2d1f6ade2247c195|8ea06de8dfe7e2a2|-1233887187||t18992.7349418013s|35dc0c70ab0edd1a|80536|rds|vector|||0.025||
-models_workflowset|stem|4ff9755ffaeb5e8a|cf09f4b8c8c973c5|3f54ab2d18ec5823|-1792344241||t18994.8517200581s|2f6fa26e9135768e|206029|rds|vector|||4.109||
 ml_lm|function|9419151dd5db5b3a||||||||||||||
-.__global__|object|efec637d1ac324a3||||||||||||||
+.__global__|object|733753238895f9b0||||||||||||||
 ml_rf|function|dddc9f9b36f48137||||||||||||||
 read_from_path|function|5b3081fb53f5e373||||||||||||||
 ml_glmnet|function|986f8e70b8e76e9f||||||||||||||
-file_functions|object|77b4b5fd958614f2||||||||||||||
+file_functions|object|fda7c61910cc96a0||||||||||||||
 plot_spatial|function|3071cef7a4a2343f||||||||||||||
 accuracy_metric|function|c5c25be2be42dd75||||||||||||||
+bayesian_resample_test|function|9092609f533fbde8||||||||||||||
 data_recipe|function|943afc9de3dd8f20||||||||||||||
+anova_resample_test|function|8569a045bcc74773||||||||||||||
 ml_lgbm|function|b8be3204a55f83e9||||||||||||||
 plot_hist|function|c9d5a26b3fbbe76f||||||||||||||
 ml_stan|function|fe4f8867691a7733||||||||||||||
@@ -21,8 +17,14 @@ plot_error|function|d2672e1c1daa512a||||||||||||||
 data_split|function|ac17904d0e922aba||||||||||||||
 ml_dt|function|b2169a37745cff02||||||||||||||
 predict_values|function|ad7d24d03ee93c32||||||||||||||
-model_fit|function|a391ade7f8f2b794||||||||||||||
+model_fit|function|a65d808e68788993||||||||||||||
 model_workflow|function|e81f0ad70e626faa||||||||||||||
-fitted_models|stem|63dc70f7259f3e28|ef9af54fc12bca85|278a0b224c8207e6|-670788693||t18994.855723526s|cc6c256f0ba48afa|10901708|rds|vector|||213.979||
-train_metrics|stem|056a4b73dd880901|b0ec9f545b4e863a|2174754ae4800233|651372177||t18994.8557249697s|471094a96b72058b|742|rds|vector|||0.103||
-predict_data|stem|70d64beac361cb35|481e01dc26d940ac|45421371152d6ec5|1524746754||t18993.7124165829s||11053|rds|vector|||0.027||Problem with mutate column predict_value.34mℹ39m predict_value  purrrmapresult, predict.x, new_data  DF.31mx39m no applicable method for predict applied to an object of class cresample_results, tune_results, tbl_df, tbl, data.frame
+raw_data|stem|b27036211aa6b7f0|2627db1c2118d911|d3de1d7f7c81a9e9|-979620141||t19024.7211890743s|bc11c898f409f9b1|153478|rds|vector|||5.05||
+param_file|stem|1ef79525569724df|a1279b691c233b3b|ef46db3751d8e999|-1046133151|params.yaml|t18996.4292483921s|79ead61f7c8922c9|161|file|vector|||0||
+train_test_split|stem|e979f2e4992f51a3|f02e77f2fb0f64b2|e4d3ea9abc6bece5|-1768825896||t19024.721190623s|a6b4f4afa545e702|160009|rds|vector|||0.04||
+params|stem|7adbba029b96bff3|38ecfd31b8ab35bc|e3b4e78d7927f70b|890816472||t19024.7211910692s|e401042a86715cce|188|rds|vector|||0||
+models_workflowset|stem|3dba9e4d1ac20799|cf09f4b8c8c973c5|401e3cbe655a90b6|-1792344241||t19024.721192948s|ce71544a409f5169|206030|rds|vector|||0.09||
+model_recipe|stem|5a650e13ad834402|2d1f6ade2247c195|ad477df7f8fc47b1|-1233887187||t19024.7211940327s|c10ee75fa14af17e|80537|rds|vector|||0.03||
+fitted_models|stem|d18a39577874757d|ef9af54fc12bca85|ffb5382611b929c8|-670788693||t19024.7254395887s|cd089e8f80b57ce7|10901695|rds|vector|||364.05||
+train_metrics|stem|e3f01802566190e5|b0ec9f545b4e863a|5ab089d581b3f432|651372177||t19024.7254431768s|8837c0ea6af13270|743|rds|vector|||0.16||
+predict_data|stem|70d64beac361cb35|481e01dc26d940ac|e8b28af318d00e4e|1524746754||t18993.7124165829s||11053|rds|vector|||0.14||Problem with mutate column predict_value.i predict_value  purrrmapresult, predict.x, new_data  DF.x no applicable method for predict applied to an object of class cresample_results, tune_results, tbl_df, tbl, data.frameCaused by error in UseMethod no applicable method for predict applied to an object of class cresample_results, tune_results, tbl_df, tbl, data.frame
