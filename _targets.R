@@ -34,22 +34,22 @@ list(
   # Model workflow sets ----
   tar_target(name = models_workflowset,
              model_workflow(DF = rsample::training(train_test_split),
-                            model_name = c("lm", "rf", "lgbm", "dt"),
+                            model_name = "lgbm",
                             features = params[["features"]])),
 
   # Train the models ----
   tar_target(name = fitted_models,
              model_fit(DF = rsample::training(train_test_split),
                        type_of_resample = "cv",
-                       model_set = models_workflowset)),
+                       model_set = models_workflowset))
 
-  # Asses the models ----
-  tar_target(name = train_metrics,
-             tune::collect_metrics(fitted_models, summarize = FALSE) |>
-               dplyr::filter(.metric == "rmse")),
-
-  # Predict Values ----
-  tar_target(name = predict_data,
-             predict_values(DF = rsample::testing(train_test_split),
-                            model_fit = fitted_models))
+  # # Asses the models ----
+  # tar_target(name = train_metrics,
+  #            tune::collect_metrics(fitted_models, summarize = FALSE) |>
+  #              dplyr::filter(.metric == "rmse")),
+  #
+  # # Predict Values ----
+  # tar_target(name = predict_data,
+  #            predict_values(DF = rsample::testing(train_test_split),
+  #                           model_fit = fitted_models))
 )

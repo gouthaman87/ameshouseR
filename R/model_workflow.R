@@ -13,10 +13,14 @@ model_workflow <- function(
   features
 ) {
 
+  # Call Recipe ----
   rec <- data_recipe(DF = DF, features = features)
 
   # Read models ----
-  mod <- purrr::map(.x = model_name, ~eval(call(glue::glue("ml_{.x}")))) |>
+  mod <- purrr::map(
+    .x = model_name,
+    ~eval(call(glue::glue("ml_{.x}")))
+  ) |>
     purrr::set_names(model_name)
 
   workflowsets::workflow_set(preproc = list(recipe = rec), models = mod)
@@ -56,14 +60,20 @@ model_fit <- function(
     folds <- rsample::bootstraps(DF, times = 5)
   }
 
+  grd_ctrl <- tune::control_grid(
+    save_pred = TRUE,
+    save_workflow = TRUE,
+    parallel_over = "everything",
+    pkgs = "treesnip"
+  )
   model_set |>
     workflowsets::workflow_map(
       resamples = folds,
-      fn = "fit_resamples",
+      grid = 10,
+      metrics = yardstick::metric_set(yardstick::rmse),
       verbose = TRUE,
-      control = tune::control_resamples(save_pred = TRUE, save_workflow = TRUE)
+      control = grd_ctrl
     )
-    # dplyr::transmute(wflow_id := gsub("recipe_","",wflow_id), result)
 }
 
 
@@ -74,8 +84,7 @@ model_fit <- function(
 #'
 #' @return Predicted Data Frame
 #' @export
-predict_values <- function(model_fit,
-                           DF) {
+predict_values <- function(model_fit, DF) {
 
   model_fit |>
     dplyr::mutate(
