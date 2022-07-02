@@ -66,6 +66,7 @@ model_fit <- function(
     parallel_over = "everything",
     pkgs = "treesnip"
   )
+
   model_set |>
     workflowsets::workflow_map(
       resamples = folds,

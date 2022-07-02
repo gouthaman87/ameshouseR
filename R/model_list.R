@@ -14,8 +14,9 @@ ml_lm <- function(){
 #' @export
 ml_glmnet <- function(){
   parsnip::linear_reg(
-    mode = "regression"
-    # penalty = tune::tune()
+    mode = "regression",
+    penalty = tune::tune(),
+    mixture = tune::tune()
   ) |>
     parsnip::set_engine("glmnet")
 }
@@ -70,8 +71,8 @@ ml_lgbm <- function(){
     loss_reduction = tune::tune(),
     min_n = tune::tune(),
     sample_size = tune::tune(),
-    trees = tune::tune(),
-    mtry = tune::tune()
+    trees = tune::tune()
+    # mtry = tune::tune()
   ) |>
     parsnip::set_engine("lightgbm")
 }
