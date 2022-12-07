@@ -1,3 +1,15 @@
+init_predict <- function(
+  DF,
+  model_name,
+  features
+) {
+
+  workflow_set <- model_workflow(
+
+  )
+}
+
+
 
 #' Create workflow sets
 #'
@@ -13,17 +25,29 @@ model_workflow <- function(
   features
 ) {
 
-  # Call Recipe ----
-  rec <- data_recipe(DF = DF, features = features)
+  tryCatch({
 
-  # Read models ----
-  mod <- purrr::map(
-    .x = model_name,
-    ~eval(call(glue::glue("ml_{.x}")))
-  ) |>
-    purrr::set_names(model_name)
+    # Call Recipe ----
+    rec <- data_recipe(DF = DF, features = features)
 
-  workflowsets::workflow_set(preproc = list(recipe = rec), models = mod)
+    cli::cli_alert_info(cli::col_blue("Create Workflow Set"))
+
+    # Read models ----
+    mod <- purrr::map(
+      .x = model_name,
+      ~eval(call(glue::glue("ml_{.x}")))
+    ) |>
+      purrr::set_names(model_name)
+
+    wflw_set <- workflowsets::workflow_set(preproc = list(recipe = rec), models = mod)
+
+    cli::cli_alert_success(cli::col_green("Successfully Created Workflow Set"))
+
+    return(wflw_set)
+
+  }, error = function(e) {
+    cli::cli_alert_danger(cli::col_br_red("{e}"))
+  })
 }
 
 
@@ -36,15 +60,15 @@ model_workflow <- function(
 #' @return Workflow Set with fit column
 #' @export
 model_fit <- function(
-  DF,
+  splt,
   type_of_resample = as.character(),
   model_set
 ) {
 
-  # Register Parallel
-  # cl <- parallel::makePSOCKcluster(2)
-  # doParallel::registerDoParallel(cl)
-  # withr::defer(parallel::stopCluster(cl))
+  DF <- rsample::training(splt)
+
+  capture.output(h2o::h2o.init())
+  withr::defer(h2o::h2o.shutdown(prompt = FALSE))
 
   if(!type_of_resample %in% c("cv", "validation", "bootstrap"))
     stop("Please Select a Resample method")
@@ -62,12 +86,12 @@ model_fit <- function(
 
   grd_ctrl <- tune::control_grid(
     save_pred = TRUE,
-    save_workflow = TRUE,
-    parallel_over = "everything",
-    pkgs = "treesnip"
+    save_workflow = TRUE
+    # parallel_over = "everything",
+    # pkgs = "treesnip"
   )
 
-  model_set |>
+  grd_results <- model_set |>
     workflowsets::workflow_map(
       resamples = folds,
       grid = 10,
@@ -75,6 +99,24 @@ model_fit <- function(
       verbose = TRUE,
       control = grd_ctrl
     )
+
+  # grd_results |>
+  #   workflowsets::rank_results() |>
+  #   dplyr::filter(.metric == "rmse") |>
+  #   dplyr::select(model, .config, rmse = mean, rank)
+  #
+  # best_results <- grd_results |>
+  #   workflowsets::extract_workflow_set_result("recipe_drf") |>
+  #   tune::select_best(metric = "rmse")
+  #
+  # final_mod <- grd_results |>
+  #   workflowsets::extract_workflow("recipe_drf") |>
+  #   tune::finalize_workflow(best_results) |>
+  #   tune::last_fit(splt)
+  #
+  # final_mod |>
+  #   workflowsets::extract_fit_parsnip() |>
+  #   vip::vip(num_features = 50)
 }
 
 

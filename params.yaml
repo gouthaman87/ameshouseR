@@ -1,9 +1,9 @@
 features:
   - Sale_Price
   - Neighborhood
+  - Garage_Cars
+  - Total_Bsmt_SF
   - Gr_liv_Area
   - Year_Built
-  - Bldg_Type
-  - Latitude
-  - Total_Bsmt_SF
+  - Garage_Area
   - First_Flr_SF

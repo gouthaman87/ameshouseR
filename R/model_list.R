@@ -47,6 +47,21 @@ ml_rf <- function(){
 }
 
 
+#' Distributed Random Forest
+#'
+#' @return model
+#' @export
+ml_drf <- function(){
+  parsnip::rand_forest(
+    mode = "regression"
+    # trees = 100
+    # mtry = tune::tune()
+  ) |>
+    parsnip::set_engine("h2o",
+                        categorical_encoding = "SortByResponse")
+}
+
+
 #' Decision Tree
 #'
 #' @return model
